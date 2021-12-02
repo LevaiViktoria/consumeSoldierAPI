@@ -13,19 +13,27 @@
 </header>
 <main>
     <p th:if="${statuscode} == 201" th:text="'New soldier is recruited'"></p>
+    <p th:if="${statuscode} == 200" th:text="'Gratulation! Less number of enemies'"></p>
     <table cellpadding="15">
         <tr>
             <th>rank</th>
             <th>birth</th>
             <th>weapon</th>
             <th>shot people</th>
+            <th></th>
         </tr>
         <tr th:each="soldier : ${soldiers}">
             <td ><a th:text="${soldier.rank}" th:href="'/soldiers/'+${soldier.id}" href="#"></a></td>
             <td th:text="${soldier.birth}">birth</td>
             <td th:text="${soldier.weapon}">weapon</td>
             <td th:text="${soldier.shotpeople}">shot people</td>
-
+            <td>
+                <form method="POST" action="/soldiers">
+                    <input type="hidden" name="id" th:value="${soldier.id}">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="submit" value="disarm">
+                </form>
+            </td>
         </tr>
     </table>
 </main>

@@ -1,5 +1,6 @@
 package hu.consumeSoldierAPI.controllers;
 
+import hu.consumeSoldierAPI.domain.Soldier;
 import hu.consumeSoldierAPI.service.SoldierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,6 +45,22 @@ public class HomeController {
                              Model model){
         int statusCode = service.addSoldier(rank, birth, weapon, shotpeople);
         model.addAttribute("statusCode", statusCode);
+        model.addAttribute("soldiers", service.getSoldiers());
+        return "soldiers";
+    }
+    @DeleteMapping("/soldiers")
+    public String disarmSoldier(@RequestParam("id") int id, Model model){
+        service.disarmSoldier(id);
+        model.addAttribute("soldiers", service.getSoldiers());
+        return "soldiers";
+    }
+
+    @PatchMapping("/soldiers")
+    public String updateSoldier(@RequestParam("id") int id,
+                                @RequestParam("shotpeople") int shot,
+                                Model model){
+        int statusCode = service.updateSoldier(id, shot);
+        model.addAttribute("soldiers", statusCode);
         model.addAttribute("soldiers", service.getSoldiers());
         return "soldiers";
     }
