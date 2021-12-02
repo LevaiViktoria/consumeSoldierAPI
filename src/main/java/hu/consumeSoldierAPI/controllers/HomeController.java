@@ -64,4 +64,22 @@ public class HomeController {
         model.addAttribute("soldiers", service.getSoldiers());
         return "soldiers";
     }
+
+    @GetMapping("/soldiers/replace/{id}")
+    public String replace(){
+        return "replace";
+    }
+
+    @PutMapping("/soldiers")
+    public String replaceSoldier(@RequestParam("id") int id,
+                                 @RequestParam("rank") int rank,
+                                 @RequestParam("birth") String birth,
+                                 @RequestParam("weapon") String weapon,
+                                 @RequestParam("shotpeople") int shotpeople,
+                                 Model model){
+        int statusCode = service.replaceSoldier(id, rank, birth, weapon, shotpeople);
+        model.addAttribute("soldiers", statusCode);
+        model.addAttribute("soldiers", service.getSoldiers());
+        return  "soldier";
+    }
 }

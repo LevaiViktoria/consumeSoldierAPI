@@ -57,5 +57,9 @@ public class SoldierService {
         ResponseEntity<Soldier> responseEntity = restTemplate.exchange(url, HttpMethod.PATCH, requestEntity,Soldier.class, values);
         return responseEntity.getStatusCodeValue();
     }
+
+    public int replaceSoldier(int id, int rank, String birth, String weapon, int shotpeople) {
+        return 200;
+    }
 }
 
